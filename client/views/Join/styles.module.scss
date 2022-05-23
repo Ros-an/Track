@@ -1,0 +1,21 @@
+.signup {
+  margin: 3rem auto;
+  width: 27.5rem;
+  .heading {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  .signupIp {
+    margin-bottom: 0.75rem;
+    &:active {
+      .signupIp__label {
+        top: 0;
+      }
+    }
+  }
+  .signupbtn {
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: -0.02rem;
+  }
+}
