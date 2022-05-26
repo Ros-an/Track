@@ -35,6 +35,7 @@ function SignUp() {
           styleClass="mb-3"
           defaultStyling
           value={signUpData.fullname}
+          minLength={2}
         />
         <InputBox
           type="email"

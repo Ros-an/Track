@@ -14,19 +14,17 @@ function InputBox({
   name,
   ...rest
 }: InputBoxProps) {
-  const [active, setActive] = useState(false);
-  const handleActive = () => {
-    setActive((prev) => !prev);
-  };
+  
   const InputBoxStyleClass = defaultStyling
     ? `${styleClass} ${styles.inputbox}`
     : styleClass;
+    console.table(rest)
   return (
     <article
-      className={`${InputBoxStyleClass} ${active && styles.active}`}
+      className={InputBoxStyleClass}
     >
       {label && (
-        <label className={`${styleClass}__label`} htmlFor={name}>
+        <label className={`${styleClass}__label ${rest.value && styles.filled}`} htmlFor={name}>
           {label}
         </label>
       )}

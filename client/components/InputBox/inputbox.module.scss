@@ -1,25 +1,40 @@
 @import "/public/css/variables.scss";
 .inputbox {
-    position: relative;
-    padding: 1.25rem 1rem 0;
-    border: 1px solid $black;
-    & label {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
+  position: relative;
+  padding: 1.25rem 1rem 0;
+  border: 1px solid $black;
+  & label {
+    position: absolute;
+    top: 50%;
+    // transform: translateY(-50%);
+    pointer-events: none;
+    transform: translateY(-50%) scale(1);
+    transform-origin: top left;
+    transition: 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+    font-size: 16px;
+    line-height: 1;
+  }
+  &:focus-within label {
+    transform: translateY(-100%) scale(0.8);
+    color: #0a53e4;
+  }
+  & label.filled {
+    transform: translateY(-100%) scale(0.8);
+  }
+  & input {
+    width: 100%;
+    height: 100%;
+    border: transparent;
+    padding: 0.5rem 0;
+    font-size: 1rem;
+    &:focus {
+      outline: none;
     }
-    & input {
-        width: 100%;
-        height: 100%;
-        border: transparent;
-        &:focus {
-            outline: none;
-        }
-    }
+  }
 }
 .inputbox.active {
-    & label {
-        transition: all 0.1s linear;
-        transform: translateY(-100%);
-    }
+  & label {
+    transition: all 0.1s linear;
+    transform: translateY(-100%);
+  }
 }
