@@ -1,9 +1,9 @@
 import express from "express";
+//controllers
+import { register } from "../controllers/auth";
 
 const router = express.Router();
 
-router.get("/register", (req, res) => {
-    res.send("This is register end point");
-});
+router.get("/register", register);
 
 module.exports = router;
