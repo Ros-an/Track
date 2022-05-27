@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import {readdirSync} from "fs";
 const morgan = require("morgan");
 require("dotenv").config();
 
@@ -11,15 +12,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
-app.use((req, res, next)=> {
-console.log("this is middleware");
-next();
-})
+
 
 // routes
-app.get("/", (req, res)=> {
-    res.send("you have server endpoing -> /")
-});
+readdirSync("./routes").map((route) => app.use("/api", require(`./routes/${route}`) ))
 
 // port
 const port = process.env.PORT || 8000;
