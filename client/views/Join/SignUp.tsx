@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import InputBox from "../../components/InputBox/InputBox";
 import styles from "./styles.module.scss"
@@ -8,9 +9,9 @@ export interface SignUpDataType {
 }
 function SignUp() {
   const [signUpData, setSignUpData] = useState<SignUpDataType>({
-    fullname: "",
-    email: "",
-    password: "",
+    fullname: "Roshan Kr. Mahato",
+    email: "mahato@gmail.com",
+    password: "123456",
   });
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -19,9 +20,10 @@ function SignUp() {
       [name]: value,
     }));
   };
-  const handleSignup = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.table(signUpData);
+    const {data} = await axios.post("http://localhost:8000/api/register",{...signUpData});
+    console.log(data);
   };
   return (
     <section className={` ${styles.signup} screen-size prl-5`}>
@@ -56,7 +58,7 @@ function SignUp() {
           defaultStyling
           value={signUpData.password}
         />
-        <button type="submit" className={`${styles.signupbtn} btn btn-block btn-primary`}>
+        <button type="submit" className={`${styles.signupbtn} btn btn-block btn-primary pointer`}>
           Sign Up
         </button>
       </form>

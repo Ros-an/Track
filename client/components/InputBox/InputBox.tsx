@@ -18,7 +18,6 @@ function InputBox({
   const InputBoxStyleClass = defaultStyling
     ? `${styleClass} ${styles.inputbox}`
     : styleClass;
-    console.table(rest)
   return (
     <article
       className={InputBoxStyleClass}
