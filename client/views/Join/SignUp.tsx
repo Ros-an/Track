@@ -38,6 +38,7 @@ function SignUp() {
           defaultStyling
           value={signUpData.fullname}
           minLength={2}
+          required
         />
         <InputBox
           type="email"
@@ -47,6 +48,7 @@ function SignUp() {
           styleClass="mb-3"
           defaultStyling
           value={signUpData.email}
+          required
         />
         <InputBox
           type="password"
@@ -55,6 +57,7 @@ function SignUp() {
           autoComplete="password"
           onChange={handleInputChange}
           styleClass="mb-3"
+          required
           defaultStyling
           value={signUpData.password}
         />
