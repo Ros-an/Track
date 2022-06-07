@@ -3,13 +3,13 @@ import React, { useState } from "react";
 import InputBox from "../../components/InputBox/InputBox";
 import styles from "./styles.module.scss"
 export interface SignUpDataType {
-  fullname: string;
+  name: string;
   email: string;
   password: string | number;
 }
 function SignUp() {
   const [signUpData, setSignUpData] = useState<SignUpDataType>({
-    fullname: "Roshan Kr. Mahato",
+    name: "Roshan Kr. Mahato",
     email: "mahato@gmail.com",
     password: "123456",
   });
@@ -32,11 +32,11 @@ function SignUp() {
         <InputBox
           type="text"
           label="Full Name"
-          name="fullname"
+          name="name"
           onChange={handleInputChange}
           styleClass="mb-3"
           defaultStyling
-          value={signUpData.fullname}
+          value={signUpData.name}
           minLength={2}
           required
         />
