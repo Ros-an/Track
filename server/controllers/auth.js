@@ -21,14 +21,13 @@ export const register = async (req, res) => {
         }); 
         //saving user at database
         await user.save();
-        console.log("this is user", user);
+        // console.log("this is user", user);
 
         return res.json({
             status: 200,
-            message: "User registered successfully!"
+            message: "User registered successfully! Please login"
         })
     } catch (err) {
-        console.log("Error", err);
         return res.status(400).send("Error.Try Again!")
     }
 }

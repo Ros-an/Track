@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import SignUp from "../../views/Join/SignUp";
 
 
 function SignUpPage() {
-  return <SignUp />
+  return <SignUp  />
 }
 
 export default SignUpPage;

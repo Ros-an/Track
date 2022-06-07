@@ -1,7 +1,10 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { ToastContent, ToastOptions } from "react-toastify";
 import InputBox from "../../components/InputBox/InputBox";
 import styles from "./styles.module.scss"
+import {  toast } from 'react-toastify';
+import { SyncOutlined } from "@ant-design/icons";
 export interface SignUpDataType {
   name: string;
   email: string;
@@ -13,6 +16,7 @@ function SignUp() {
     email: "mahato@gmail.com",
     password: "123456",
   });
+  const [loading, setLoading] = useState<boolean>(false);
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setSignUpData((prev) => ({
@@ -22,8 +26,15 @@ function SignUp() {
   };
   const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const {data} = await axios.post("http://localhost:8000/api/register",{...signUpData});
-    console.log(data);
+    setLoading(true)
+    try {
+      const {data} = await axios.post("http://localhost:8000/api/register",{...signUpData});
+      toast.success(data.message);
+    } catch (err: any) {
+      toast.error(err.response.data)
+    } finally{
+      setLoading(false);
+    }
   };
   return (
     <section className={` ${styles.signup} screen-size prl-5`}>
@@ -61,8 +72,10 @@ function SignUp() {
           defaultStyling
           value={signUpData.password}
         />
-        <button type="submit" className={`${styles.signupbtn} btn btn-block btn-primary pointer`}>
-          Sign Up
+        <button type="submit" className={`${styles.signupbtn} btn btn-block btn-primary pointer`}
+        disabled={!signUpData.name || !signUpData.email || !signUpData.password || loading}
+        >
+          {loading ? <SyncOutlined spin /> :"Sign Up"}
         </button>
       </form>
     </section>
