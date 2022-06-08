@@ -28,7 +28,7 @@ function SignUp() {
     e.preventDefault();
     setLoading(true)
     try {
-      const {data} = await axios.post("http://localhost:8000/api/register",{...signUpData});
+      const {data} = await axios.post("/api/register",{...signUpData});
       toast.success(data.message);
     } catch (err: any) {
       toast.error(err.response.data)
@@ -36,6 +36,7 @@ function SignUp() {
       setLoading(false);
     }
   };
+  
   return (
     <section className={` ${styles.signup} screen-size prl-5`}>
       <h4 className={`${styles.heading} mb-4`}>Signup and start learning</h4>
