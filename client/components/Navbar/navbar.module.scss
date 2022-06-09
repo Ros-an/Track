@@ -1,3 +1,5 @@
+@import "/public/css/variables.scss";
+
 .navbar {
   padding: 0 1.25rem;
   height: 4rem;
@@ -16,6 +18,15 @@
         line-height: 1.2;
         letter-spacing: -0.02rem;
         font-size: 1rem;
+        padding: 0.5rem 0.75rem;
+      }
+      & li:first-child {
+        border: 1px solid $black;
+        
+      }
+      & li:last-child {
+        background: $black;
+        color: white;
       }
     }
   }
