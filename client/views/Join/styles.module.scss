@@ -5,17 +5,48 @@
     font-size: 1rem;
     font-weight: 600;
   }
-  .signupIp {
-    margin-bottom: 0.75rem;
-    &:active {
-      .signupIp__label {
-        top: 0;
-      }
-    }
-  }
+  // .signupIp {
+  //   margin-bottom: 0.75rem;
+  //   &:active {
+  //     .signupIp__label {
+  //       top: 0;
+  //     }
+  //   }
+  // }
   .signupbtn {
     font-size: 1rem;
     font-weight: 600;
     letter-spacing: -0.02rem;
   }
+  &__login {
+    border-bottom: 1px solid;
+    font-weight: 500;
+  }
 }
+// login style
+.login {
+  margin: 3rem auto;
+  width: 27.5rem;
+  .heading {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  // .loginIp {
+  //   margin-bottom: 0.75rem;
+  //   &:active {
+  //     .loginIp__label {
+  //       top: 0;
+  //     }
+  //   }
+  // }
+  .loginbtn {
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: -0.02rem;
+  }
+  &__signup {
+    border-bottom: 1px solid;
+    font-weight: 500;
+  }
+}
+

@@ -5,6 +5,7 @@ import InputBox from "../../components/InputBox/InputBox";
 import styles from "./styles.module.scss"
 import {  toast } from 'react-toastify';
 import { SyncOutlined } from "@ant-design/icons";
+import Link from "next/link";
 export interface SignUpDataType {
   name: string;
   email: string;
@@ -79,6 +80,12 @@ function SignUp() {
           {loading ? <SyncOutlined spin /> :"Sign Up"}
         </button>
       </form>
+      <p className="text-center m4">Already have an account?
+        {" "}
+        <Link href="/join/login">
+          <a className={styles.signup__login}>Login</a>
+        </Link>
+      </p>
     </section>
   );
 }
