@@ -1,8 +1,9 @@
 import React from 'react'
+import Login from '../../views/Join/Login';
 
 function LoginPage() {
   return (
-    <div className='bg-home'>Login</div>
+    <Login />
   )
 }
 
