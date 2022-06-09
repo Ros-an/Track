@@ -25,7 +25,7 @@ function Login() {
   };
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // setLoading(true)
+    setLoading(true)
     try {
       const {data} = await axios.post("/api/login",{...loginData});
       // toast.success(data.message);
@@ -36,7 +36,7 @@ function Login() {
       console.log("Login Error", err);
       
     } finally{
-      // setLoading(false);
+      setLoading(false);
     }
   };
   
