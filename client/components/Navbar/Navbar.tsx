@@ -15,7 +15,7 @@ function Navbar() {
             <li className="pointer">Login</li>
           </Link>
           <Link href="/join/signup">
-            <li className="pointer">SignUp</li>
+            <li className="pointer">Sign up</li>
           </Link>
         </ul>
       </section>
