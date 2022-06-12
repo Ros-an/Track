@@ -3,16 +3,21 @@
 .navbar {
   padding: 0 1.25rem;
   height: 4rem;
+  width: 100%;
   box-shadow: 0 2px 4px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 8%);
+  & section {
+    height: 100%;
+  }
   &__left {
     font-size: 1.5rem;
   }
   &__right {
-    ul {
+   &> ul {
       padding: 0;
       margin: 0;
       list-style: none;
       gap: 1rem;
+      height: 100%;
       & li {
         font-weight: 400;
         line-height: 1.2;
@@ -20,14 +25,60 @@
         font-size: 1rem;
         padding: 0.5rem 0.75rem;
       }
-      & li:first-child {
+      & li:nth-child(1).login {
         border: 1px solid $black;
         
       }
-      & li:last-child {
+      & li:nth-child(2).signup {
         background: $black;
         color: white;
       }
+      // & ul.ant-menu-horizontal  {
+      //   border-bottom: none !important;
+      // }
     }
   }
 }
+
+.dropbtn {
+  background-color: transparent;
+  // color: white;
+  padding: 0 0.5rem;
+  // font-size: 16px;
+  border: none;
+  height: 100%;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  height: 100%;
+}
+.dropdown__content_wrapper {
+  display: none;
+  position: absolute;
+  min-width: 16rem;
+  right: 0;
+  z-index: 1;
+}
+.dropdown__content {
+  background-color: #fff;
+  box-shadow: 0 0 0 1px #d1d7dc, 0 2px 4px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 8%);
+  margin-top: 0.25rem;
+  width: 100%;
+}
+
+.dropdown__content li {
+  // color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown__content li:hover {
+  color: $primary-btn-bg;
+}
+
+.dropdown:hover .dropdown__content_wrapper {display: block;}
+
+// .dropdown:hover .dropbtn {background-color: #3e8e41;}
