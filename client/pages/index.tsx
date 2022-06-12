@@ -1,4 +1,7 @@
+import { useRouter } from "next/router";
+
 function Home() {
+  const router = useRouter();
   return (
     <div className="bg-home">
       <h1>This is home, welcome to nextjs! Kya baat 😎 🙌</h1>
