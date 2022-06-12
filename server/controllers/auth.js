@@ -50,7 +50,8 @@ export const login  = async (req, res) => {
         if(!user) return res.status(400).send("No user with this email!");
         // compare password
         const match = await comparePassword(password, user.password);
-        // create signed jwt
+        if(match){
+            // create signed jwt
         const token = jwt.sign({_id: user._id}, process.env.JWT_SECRET, {expiresIn: "7d"});
 
         user.password = undefined;
@@ -60,9 +61,20 @@ export const login  = async (req, res) => {
             // secure: true // works for https, which wil be for production
         })
         // send user as response
-        res.json(user);
+        return res.json(user);
+        }
+        return res.status(400).send("Password do not match!")
     } catch (error) {
         console.log(error);
         return res.status(400).send("Error. Try Again!");
+    }
+}
+
+export const logout =async (req, res) => {
+    try {
+        res.clearCookie("token");
+        res.json({message: "Logged out successfully!"});
+    } catch (error) {
+        console.log("Error", error);
     }
 }
