@@ -1,21 +1,27 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ToastContent, ToastOptions } from "react-toastify";
 import InputBox from "../../components/InputBox/InputBox";
-import styles from "./styles.module.scss"
-import {  toast } from 'react-toastify';
+import styles from "./styles.module.scss";
+import { toast } from "react-toastify";
 import { SyncOutlined } from "@ant-design/icons";
 import Link from "next/link";
+import { useCustomGlobalContext } from "../../context/GlobalContext";
+import { useRouter } from "next/router";
+import { url } from "inspector";
 export interface loginDataType {
   email: string;
   password: string | number;
 }
 function Login() {
+  const { dispatch } = useCustomGlobalContext();
   const [loginData, setLoginData] = useState<loginDataType>({
     email: "mahato@gmail.com",
     password: "123456",
   });
+  const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setLoginData((prev) => ({
@@ -23,23 +29,31 @@ function Login() {
       [name]: value,
     }));
   };
+  console.log("login", router);
+
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true)
+    setLoading(true);
     try {
-      const {data} = await axios.post("/api/login",{...loginData});
-      // toast.success(data.message);
-      console.log("Login response", data);
-      
+      const { data } = await axios.post("/api/login", { ...loginData });
+      dispatch({
+        type: "LOGIN",
+        payload: data,
+      });
+      // save user info in localstorage
+      localStorage.setItem("user", JSON.stringify(data));
+      const redirect = router.query?.next ? String(router.query.next) : "/";
+      // redirect
+      router.push(redirect);
+      toast.success("Logged in successfully!");
     } catch (err: any) {
-      toast.error(err.message)
+      toast.error(err.response.data);
       console.log("Login Error", err);
-      
-    } finally{
+    } finally {
       setLoading(false);
     }
   };
-  
+
   return (
     <section className={`${styles.login} screen-size prl-5`}>
       <h4 className={`${styles.heading} mb-4`}>Log In to Your Account!</h4>
@@ -65,15 +79,17 @@ function Login() {
           defaultStyling
           value={loginData.password}
         />
-        <button type="submit" className={`${styles.loginbtn} btn btn-block btn-primary pointer`}
-        disabled={!loginData.email || !loginData.password || loading}
+        <button
+          type="submit"
+          className={`${styles.loginbtn} btn btn-block btn-primary pointer`}
+          disabled={!loginData.email || !loginData.password || loading}
         >
-          {loading ? <SyncOutlined spin /> :"Login"}
+          {loading ? <SyncOutlined spin /> : "Login"}
         </button>
       </form>
-      <p className="text-center m4">Don't have an account?
-        {" "}
-        <Link href="/join/login">
+      <p className="text-center m4">
+        Don't have an account?{" "}
+        <Link href="/join/signup">
           <a className={styles.login__signup}>Sign up</a>
         </Link>
       </p>
