@@ -9,11 +9,14 @@ import Link from "next/link";
 import { useCustomGlobalContext } from "../../context/GlobalContext";
 import { useRouter } from "next/router";
 import { url } from "inspector";
+import { isAuthorised } from "../../utils/global";
+import usePrivateRoute from "../../hooks/usePrivateRoute";
 export interface loginDataType {
   email: string;
   password: string | number;
 }
 function Login() {
+  usePrivateRoute();
   const { dispatch } = useCustomGlobalContext();
   const [loginData, setLoginData] = useState<loginDataType>({
     email: "mahato@gmail.com",
@@ -29,7 +32,7 @@ function Login() {
       [name]: value,
     }));
   };
-  console.log("login", router);
+  console.count("login");
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -42,13 +45,14 @@ function Login() {
       });
       // save user info in localstorage
       localStorage.setItem("user", JSON.stringify(data));
-      const redirect = router.query?.next ? String(router.query.next) : "/";
+
       // redirect
+      const redirect = router.query?.next ? String(router.query.next) : "/";
       router.push(redirect);
+
       toast.success("Logged in successfully!");
     } catch (err: any) {
       toast.error(err.response.data);
-      console.log("Login Error", err);
     } finally {
       setLoading(false);
     }

@@ -2,16 +2,18 @@ import axios from "axios";
 import React, { useState } from "react";
 import { ToastContent, ToastOptions } from "react-toastify";
 import InputBox from "../../components/InputBox/InputBox";
-import styles from "./styles.module.scss"
-import {  toast } from 'react-toastify';
+import styles from "./styles.module.scss";
+import { toast } from "react-toastify";
 import { SyncOutlined } from "@ant-design/icons";
 import Link from "next/link";
+import usePrivateRoute from "../../hooks/usePrivateRoute";
 export interface SignUpDataType {
   name: string;
   email: string;
   password: string | number;
 }
 function SignUp() {
+  usePrivateRoute();
   const [signUpData, setSignUpData] = useState<SignUpDataType>({
     name: "Roshan Kr. Mahato",
     email: "mahato@gmail.com",
@@ -27,17 +29,17 @@ function SignUp() {
   };
   const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true)
+    setLoading(true);
     try {
-      const {data} = await axios.post("/api/register",{...signUpData});
+      const { data } = await axios.post("/api/register", { ...signUpData });
       toast.success(data.message);
     } catch (err: any) {
-      toast.error(err.response.data)
-    } finally{
+      toast.error(err.response.data);
+    } finally {
       setLoading(false);
     }
   };
-  
+
   return (
     <section className={` ${styles.signup} screen-size prl-5`}>
       <h4 className={`${styles.heading} mb-4`}>Signup and start learning</h4>
@@ -74,14 +76,21 @@ function SignUp() {
           defaultStyling
           value={signUpData.password}
         />
-        <button type="submit" className={`${styles.signupbtn} btn btn-block btn-primary pointer`}
-        disabled={!signUpData.name || !signUpData.email || !signUpData.password || loading}
+        <button
+          type="submit"
+          className={`${styles.signupbtn} btn btn-block btn-primary pointer`}
+          disabled={
+            !signUpData.name ||
+            !signUpData.email ||
+            !signUpData.password ||
+            loading
+          }
         >
-          {loading ? <SyncOutlined spin /> :"Sign Up"}
+          {loading ? <SyncOutlined spin /> : "Sign Up"}
         </button>
       </form>
-      <p className="text-center m4">Already have an account?
-        {" "}
+      <p className="text-center m4">
+        Already have an account?{" "}
         <Link href="/join/login">
           <a className={styles.signup__login}>Login</a>
         </Link>
