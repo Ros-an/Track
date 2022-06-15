@@ -11,3 +11,10 @@ export const splitStr = (text: string, basedOn: any): string[] | string => {
     }
     return text;
 }
+
+export const isAuthorised = ()=> {
+    if(localStorage.getItem("user")){
+        return true
+    }
+    return false;
+}
